@@ -1,0 +1,24 @@
+{
+  "author": "Jake Luer <jake@alogicalparadox.com>",
+  "name": "tea",
+  "description": "Tiny async logging.",
+  "version": "0.0.1",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/logicalparaodox/tea.git"
+  },
+  "main": "./index",
+  "scripts": {
+    "test": "make test"
+  },
+  "engines": {
+    "node": ">= 0.4.0"
+  },
+  "dependencies": {
+    "drip": "0.2.x"
+  },
+  "devDependencies": {
+    "mocha": "*",
+    "chai": "*"
+  }
+}
