@@ -1,14 +1,12 @@
 var tea = require('..')
   , join = require('path').join
-  , stream = require('fs').createWriteStream(join(__dirname, 'log.txt'));
-
+  , stream = require('fs').createWriteStream(join(__dirname, 'log.txt'), { flags: 'a' }); // flag a to `append`
 
 var log = new tea.Logger({
     namespace: 'basic-logger'
   , levels: 'syslog'
   , transports: [
-        'console'
-      , { name: 'file'
+        { name: 'file'
         , stream: stream }
     ]
 });

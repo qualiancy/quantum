@@ -1,6 +1,4 @@
-var tea = require('..')
-  , join = require('path').join;
-
+var tea = require('..');
 
 var log = new tea.Logger({
     namespace: 'basic-logger'
