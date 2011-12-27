@@ -7,8 +7,6 @@ var log = new tea.Logger({
   , levels: 'syslog'
   , transports: [
         'console'
-      , { name: 'file'
-        , path: join(__dirname, 'logs.log') }
     ]
 });
 
