@@ -1,4 +1,12 @@
 
+0.0.4 / 2012-01-01
+==================
+
+  * file transport loads async
+  * console works with new event array
+  * logger queues messages if transports aren't fully loaded
+  * utils for directory making
+
 0.0.3 / 2012-01-01
 ==================
 
