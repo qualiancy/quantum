@@ -1,4 +1,11 @@
 
+0.0.5 / 2012-01-01
+==================
+
+  * queue empties itself on initialize
+  * remove debuggin console.logs
+  * json logger knows about namespace
+
 0.0.4 / 2012-01-01
 ==================
 
