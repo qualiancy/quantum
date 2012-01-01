@@ -6,7 +6,7 @@
   "version": "0.0.5",
   "repository": {
     "type": "git",
-    "url": "git://github.com/logicalparaodox/tea.git"
+    "url": "git://github.com/logicalparadox/tea.git"
   },
   "main": "./index",
   "scripts": {
