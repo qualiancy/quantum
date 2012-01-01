@@ -2,7 +2,8 @@
   "author": "Jake Luer <jake@alogicalparadox.com>",
   "name": "tea",
   "description": "Tiny async logging.",
-  "version": "0.0.2",
+  "keywords": ["logger", "logging", "log"],
+  "version": "0.0.3",
   "repository": {
     "type": "git",
     "url": "git://github.com/logicalparaodox/tea.git"

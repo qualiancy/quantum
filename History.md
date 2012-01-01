@@ -1,4 +1,15 @@
 
+0.0.3 / 2012-01-01
+==================
+
+  * namespacing
+  * transports use themes
+  * moved display logic to 'themes'
+  * cleaned up examples
+  * added "tokens"
+  * longer levels
+  * moved utils to separate file
+
 0.0.2 / 2011-12-27
 ==================
 
