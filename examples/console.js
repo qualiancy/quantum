@@ -1,10 +1,9 @@
 var tea = require('..');
 
 var log = new tea.Logger({
-    namespace: 'basic-logger'
-  , levels: 'syslog'
+    levels: 'syslog'
   , transports: [
-        'console'
+        {console: { reporter: 'npm' }}
     ]
 });
 
