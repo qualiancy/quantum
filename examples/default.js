@@ -1,15 +1,6 @@
-var tea = require('..')
-  , join = require('path').join;
+var tea = require('..');
 
-var log = new tea.Logger({
-    namespace: 'file-logger'
-  , levels: 'syslog'
-  , transports: [
-        { file: {
-            path: join(__dirname) }
-        }
-    ]
-});
+var log = new tea.Logger();
 
 log.log('info', 'Hello World');
 log.info('This is info.');
