@@ -1,4 +1,17 @@
 
+0.0.6 / 2012-01-01
+==================
+
+  * readme basics
+  * added console highlight to utils
+  * added default example, change file example ns
+  * console logger uses npm reporter
+  * changed default namespace
+  * using terminology 'reporters'
+  * readme
+  * misspelling for ghlink in package.json. Closes #1
+  * clean up json theme
+
 0.0.5 / 2012-01-01
 ==================
 
