@@ -1,4 +1,14 @@
 
+0.0.7 / 2012-01-01
+==================
+
+  * logger emits ready when all transports loaded
+  * optional filename for file transport
+  * default reporter styling
+  * examples match syslog levesl
+  * cleanup syslog levels
+  * file uses reporter
+
 0.0.6 / 2012-01-01
 ==================
 
