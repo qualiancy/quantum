@@ -7,12 +7,12 @@ var log = new tea.Logger({
     ]
 });
 
-log.log('info', 'Hello World');
+log.log('info', 'Tea please!');
 log.info('This is info.');
-log.debug('This is debug');
-log.notice('this is a notice');
-log.warning('this is a warning');
-log.error('this is an error');
-log.critical('This is critical!!');
-log.alert('this is an alert');
-log.emergency('this is an emergency');
+log.debug('This is debug.');
+log.notice('This is a notice.');
+log.warn('This is a warning.');
+log.error('This is an error.');
+log.crit('This is critical!!');
+log.alert('This is an alert.');
+log.emerg('This is an emergency.');
