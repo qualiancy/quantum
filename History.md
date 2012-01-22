@@ -1,4 +1,13 @@
 
+0.0.8 / 2012-01-22 
+==================
+
+  * cleaner transport loading
+  * [refactor] using reporter loader, not lazy inline loading
+  * git ignore vim swap files
+  * added lazy loaders
+  * mass renaming
+
 0.0.7 / 2012-01-01
 ==================
 
