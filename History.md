@@ -1,4 +1,11 @@
 
+0.0.9 / 2012-01-22 
+==================
+
+  * proper level binding
+  * logger pulls transport list from 1) env 2) transports 3) console
+  * logger refactor level binding
+
 0.0.8 / 2012-01-22 
 ==================
 
