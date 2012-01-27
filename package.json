@@ -3,7 +3,7 @@
   "name": "tea",
   "description": "Tiny async logging.",
   "keywords": ["logger", "logging", "log"],
-  "version": "0.0.10",
+  "version": "0.0.11",
   "repository": {
     "type": "git",
     "url": "git://github.com/logicalparadox/tea.git"
