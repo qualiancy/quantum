@@ -1,4 +1,10 @@
 
+0.0.12 / 2012-04-22 
+==================
+
+  * Merge pull request #2 from domenic/patch-1
+  * Don't call getgid/getuid unless they exist.
+
 0.0.11 / 2012-01-26 
 ==================
 
