@@ -1,11 +1,11 @@
 var tea = require('../..')
-  , log = new tea.Logger();
+  , log = new tea.Logger('service-example');
 
 log.use(tea.console());
 log.init();
 
-tea.startService(5000, function (server, service) {
-  service.on('log', function (obj) {
-    log.logEvent(obj);
-  });
+var service = tea.createService(log);
+
+service.listen(5000, function () {
+  log.info('Tea service started on port 5000');
 });
