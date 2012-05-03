@@ -1,4 +1,18 @@
 
+0.0.13 / 2012-05-03 
+==================
+
+  * service example
+  * exposed createService to start service
+  * added service service
+  * added service transport
+  * added orchid dep
+  * added Logger#logEvent for json object logging
+  * refactor tokens to single getter
+  * default reporter shows time
+  * test makefile
+  * token date stores number
+
 0.0.12 / 2012-04-22 
 ==================
 
