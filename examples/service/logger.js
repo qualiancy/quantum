@@ -1,12 +1,8 @@
-var tea = require('../..');
+var tea = require('../..')
+  , log = new tea.Logger('service-logger');
 
-var log = new tea.Logger({
-    namespace: 'service-logger'
-  , levels: 'syslog'
-  , transports: [
-      { service: 'ws://localhost:5000' }
-    ]
-});
+log.use(tea.service('ws://localhost:5000'));
+log.init();
 
 log.log('info', 'Tea please!');
 log.info('This is info.');

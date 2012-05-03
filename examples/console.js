@@ -1,11 +1,8 @@
-var tea = require('..');
+var tea = require('..')
+  , log = new tea.Logger('themed');
 
-var log = new tea.Logger({
-    levels: 'syslog'
-  , transports: [
-        {console: { reporter: 'npm' }}
-    ]
-});
+log.use(tea.console({ theme: 'npm' }));
+log.init();
 
 log.log('info', 'Tea please!');
 log.info('This is info.');

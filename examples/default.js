@@ -1,6 +1,8 @@
-var tea = require('..');
+var tea = require('..')
+  , log = new tea.Logger();
 
-var log = new tea.Logger();
+log.use(tea.console());
+log.init();
 
 log.log('info', 'Tea please!');
 log.info('This is info.');
