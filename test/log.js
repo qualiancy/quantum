@@ -3,7 +3,8 @@ if (!process.env.NODE_ENV) process.env.NODE_ENV = 'test';
 var chai = require('chai')
   , should = chai.should();
 
-var tea = require('..');
+var tea = require('..')
+  , Promise = require('oath');
 
 describe('Logger', function () {
 
@@ -29,11 +30,15 @@ describe('Logger', function () {
 
     var called = false;
     function middleware (logger) {
+      var defer = new Promise();
       logger.should.eql(log);
       called = true;
+      defer.resolve();
+      return defer.promise;
     }
 
     log.use(middleware);
+    log.init();
     called.should.be.true;
   });
 
