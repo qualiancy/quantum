@@ -47,7 +47,7 @@ describe('Logger', function () {
       .and.be.a('function');
     tea.should.have.property('file')
       .and.be.a('function');
-    tea.should.have.property('service')
+    tea.should.have.property('broadcast')
       .and.be.a('function');
   });
 });

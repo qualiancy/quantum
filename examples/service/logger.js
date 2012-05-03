@@ -1,7 +1,7 @@
 var tea = require('../..')
   , log = new tea.Logger('service-logger');
 
-log.use(tea.service('ws://localhost:5000'));
+log.use(tea.broadcast('ws://localhost:5000'));
 log.init();
 
 log.log('info', 'Tea please!');
