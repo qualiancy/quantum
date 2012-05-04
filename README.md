@@ -1,8 +1,6 @@
-# Tea
+# Tea 
 
-### Simple. Tiny. Logging.
-
-This package is still under construction, but if you want to use it check out the examples folder.
+> Transport independant console and JSON logging.
 
 ## Installation
 
@@ -18,23 +16,91 @@ Levels are defined by a string to numerical reference. Each level should also ha
 with it for use with a reporter that supports colorful output.
 
 * Syslog
+* CLI
 
 ### Transports
 
-Transports are used to change where the logs are written to. Console and file are
-supported by default and multiple transports per logger are permitted.
+Transports are used to change where the logs are written.
 
-* Console
-* File (Uses the json reporter by default)
+#### Console
 
-### Reporters
+Console logging provides a number of themes to stylize the output.
 
-Reporters are used to change how the output is displayed and are defined on a per
-transport basis. Each transport can also specify a default reporter.
+```js
+var log = new tea.Logger('my-app');
 
-* Default
-* NPM
-* JSON
+log.use(tea.console({ theme: 'default' });
+log.init();
+
+log.info('Hello Universe');
+```
+
+![Tea Console Themes](http://f.cl.ly/items/22230e0G0p0p1C0X4631/tea_themes.png)
+
+#### File
+
+File logging will stream log data to file in line-delimeted JSON format. 
+
+```js
+var log = new tea.Logger('my-app');
+
+log.use(tea.file(__dirname + '/logs'));
+log.init();
+
+log.info('Hello Universe');
+```
+
+#### Broadcast
+
+Broadcast logging will broadcast events through websockets. Tea also comes
+with with a service so you can create my application that all broadcast to a 
+single log collection service. More information below.
+
+```js
+var log = new tea.Logger('my-app');
+
+log.use(tea.broadcast('ws://localhost:5000'));
+log.init();
+
+log.info('Hello Universe');
+```
+
+### Service
+
+The Tea collection service is for use with the broadcast transport. The service
+will proxy incoming log events to a new Tea logger. This will allow for multiple
+logger collection by a single service.
+
+The following example will proxy all incoming broadcasted log events to the 
+file transport. 
+
+```js
+var log = nwe tea.Logger('tea-collector');
+
+log.use(tea.file(__dirname + '/logs'));
+log.init();
+
+var service = tea.createService(log);
+service.listen(5000, function (err) {
+  if (err) throw err;
+  log.info('Tea Collector started on port 5000');
+});
+```
+
+## Tests
+
+Tests are writting in [Mocha](http://github.com/visionmedia/mocha) using 
+the [Chai](http://chaijs.com) `should` BDD assertion library. Make sure you 
+have that installed, clone this repo, install dependacies using `npm install`.
+
+    $ make test
+
+## Contributors
+
+Interested in contributing? Fork to get started. Contact [@logicalparadox](http://github.com/logicalparadox) 
+if you are interested in being regular contributor.
+
+* Jake Luer ([Github: @logicalparadox](http://github.com/logicalparadox)) ([Twitter: @jakeluer](http://twitter.com/jakeluer)) ([Website](http://alogicalparadox.com))
 
 ## License
 
