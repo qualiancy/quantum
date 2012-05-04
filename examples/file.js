@@ -2,7 +2,7 @@ var tea = require('..')
   , log = new tea.Logger('file-logger');
 
 log.use(tea.file(__dirname));
-log.init();
+log.start();
 
 log.write('info', 'Tea please!');
 log.info('This is info.');

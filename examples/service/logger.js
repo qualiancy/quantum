@@ -2,7 +2,7 @@ var tea = require('../..')
   , log = new tea.Logger('service-logger');
 
 log.use(tea.broadcast('ws://localhost:5000'));
-log.init();
+log.start();
 
 log.write('info', 'Tea please!');
 log.info('This is info.');

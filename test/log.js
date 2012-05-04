@@ -38,7 +38,7 @@ describe('Logger', function () {
     }
 
     log.use(middleware);
-    log.init();
+    log.start();
     called.should.be.true;
   });
 

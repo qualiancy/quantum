@@ -10,7 +10,7 @@ console.log('');
   var log = new tea.Logger('my-app');
 
   log.use(tea.console({ theme: theme }));
-  log.init();
+  log.start();
 
   log.write('info', 'Tea please!');
   log.info('This is info.');

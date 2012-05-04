@@ -2,7 +2,7 @@ var tea = require('../..')
   , log = new tea.Logger('service-example');
 
 log.use(tea.console());
-log.init();
+log.start();
 
 var service = tea.createService(log);
 
