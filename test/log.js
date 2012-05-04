@@ -33,7 +33,7 @@ describe('Logger', function () {
       var defer = new Promise();
       logger.should.eql(log);
       called = true;
-      defer.resolve();
+      defer.resolve({});
       return defer.promise;
     }
 
