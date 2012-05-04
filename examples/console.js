@@ -12,7 +12,7 @@ console.log('');
   log.use(tea.console({ theme: theme }));
   log.init();
 
-  log.log('info', 'Tea please!');
+  log.write('info', 'Tea please!');
   log.info('This is info.');
   log.debug('This is debug.');
   log.notice('This is a notice.');

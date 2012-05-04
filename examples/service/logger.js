@@ -4,7 +4,7 @@ var tea = require('../..')
 log.use(tea.broadcast('ws://localhost:5000'));
 log.init();
 
-log.log('info', 'Tea please!');
+log.write('info', 'Tea please!');
 log.info('This is info.');
 log.debug('This is debug.');
 log.notice('This is a notice.');
