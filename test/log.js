@@ -45,7 +45,7 @@ describe('Logger', function () {
   it('should provide all of the transports for export', function () {
     tea.should.have.property('console')
       .and.be.a('function');
-    tea.should.have.property('file')
+    tea.should.have.property('writeFile')
       .and.be.a('function');
     tea.should.have.property('broadcast')
       .and.be.a('function');
