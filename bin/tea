@@ -1,0 +1,9 @@
+#! /usr/bin/env node
+
+var args = require('optimist').argv
+  , command = args._.slice(0)
+  , cli = require('../lib/tea/cli');
+
+args.cwd = process.cwd();
+
+cli(command, args);

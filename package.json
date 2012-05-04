@@ -9,6 +9,9 @@
     "url": "git://github.com/logicalparadox/tea.git"
   },
   "main": "./index",
+  "bin": {
+    "tea": "./bin/tea"
+  },
   "scripts": {
     "test": "make test"
   },
@@ -19,7 +22,8 @@
     "drip": "0.2.x",
     "oath": "0.2.x",
     "orchid": "0.0.x",
-    "filtr": "0.2.x"
+    "filtr": "0.2.x",
+    "optimist": "0.3.x"
   },
   "devDependencies": {
     "mocha": "*",
