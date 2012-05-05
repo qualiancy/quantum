@@ -1,12 +1,23 @@
 if (!process.env.NODE_ENV) process.env.NODE_ENV = 'test';
 
 var chai = require('chai')
+  , spies = require('chai-spies')
   , should = chai.should();
 
+chai.use(spies);
+
 var tea = require('..')
+  , teaLevels = require('../lib/tea/levels')
   , Promise = require('oath');
 
 describe('Logger', function () {
+
+  it('should export correctly', function () {
+    tea.should.be.a('function');
+    tea.Logger.should.be.a('function');
+    tea.Service.should.be.a('function');
+    tea.createService.should.be.a('function');
+  });
 
   it('should allow for environment configuration', function () {
     var log = new tea.Logger();
@@ -49,5 +60,83 @@ describe('Logger', function () {
       .and.be.a('function');
     tea.should.have.property('broadcast')
       .and.be.a('function');
+  });
+
+  describe('levels', function () {
+    function checkLevels (log, done) {
+      return function checkLevel (level) {
+        log._levels.levels
+          .should.have.property(level)
+          .be.a('number');
+
+        var spy = chai.spy(function (event) {
+          should.exist(event);
+          event.should.be.a('object');
+          event.should.have.property('level', level);
+        });
+
+        log.once('event', spy);
+        log.once([ 'event', level ], spy);
+
+        log.write(level, 'hello universe');
+        spy.should.have.been.called.twice;
+        done();
+      }
+    }
+
+    it('should automatically mount the `syslog` levels', function () {
+      var log = tea('check-syslog')
+        , levels = Object.keys(teaLevels.syslog.levels)
+        , spy = chai.spy();
+
+      log.start();
+      levels.forEach(checkLevels(log, spy));
+      spy.should.have.been.called.exactly(levels.length);
+    });
+
+    it('should allow for levels to be mounted', function () {
+      var log = tea('check-levels')
+        , levels = Object.keys(teaLevels.syslog.levels)
+        , spy = chai.spy();
+
+      log.levels('syslog');
+      log.start();
+      levels.forEach(checkLevels(log, spy));
+      spy.should.have.been.called.exactly(levels.length);
+    });
+
+    it('should work for `cli` levels', function () {
+      var log = tea('check-levels')
+        , levels = Object.keys(teaLevels.cli.levels)
+        , spy = chai.spy();
+
+      log.levels('cli');
+      log.start();
+      levels.forEach(checkLevels(log, spy));
+      spy.should.have.been.called.exactly(levels.length);
+    });
+
+    it('should work for `http` levels', function () {
+      var log = tea('check-levels')
+        , levels = Object.keys(teaLevels.http.levels)
+        , spy = chai.spy();
+
+      log.levels('http');
+      log.start();
+      levels.forEach(checkLevels(log, spy));
+      spy.should.have.been.called.exactly(levels.length);
+    });
+
+    it('should allow for custom levels', function () {
+      var log = tea('check-levels')
+        , lvlSpec = { levels: { one: 1, two: 2 } }
+        , levels = Object.keys(lvlSpec.levels)
+        , spy = chai.spy();
+
+      log.levels(lvlSpec);
+      log.start();
+      levels.forEach(checkLevels(log, spy));
+      spy.should.have.been.called.exactly(levels.length);
+    });
   });
 });
