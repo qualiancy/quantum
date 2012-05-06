@@ -10,7 +10,7 @@
   },
   "main": "./index",
   "bin": {
-    "tea": "./bin/quantum"
+    "quantum": "./bin/quantum"
   },
   "scripts": {
     "test": "make test"
