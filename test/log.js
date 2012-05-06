@@ -6,21 +6,21 @@ var chai = require('chai')
 
 chai.use(spies);
 
-var tea = require('..')
-  , teaLevels = require('../lib/tea/levels')
+var quantum = require('..')
+  , quantumLevels = require('../lib/quantum/levels')
   , Promise = require('oath');
 
 describe('Logger', function () {
 
   it('should export correctly', function () {
-    tea.should.be.a('function');
-    tea.Logger.should.be.a('function');
-    tea.Service.should.be.a('function');
-    tea.createService.should.be.a('function');
+    quantum.should.be.a('function');
+    quantum.Logger.should.be.a('function');
+    quantum.Service.should.be.a('function');
+    quantum.createService.should.be.a('function');
   });
 
   it('should allow for environment configuration', function () {
-    var log = new tea.Logger();
+    var log = new quantum.Logger();
     log.should.respondTo('configure');
 
     log.configure('test', function () {
@@ -36,7 +36,7 @@ describe('Logger', function () {
   });
 
   it('should allow for use', function () {
-    var log = new tea.Logger();
+    var log = new quantum.Logger();
     log.should.respondTo('use');
 
     var called = false;
@@ -54,11 +54,11 @@ describe('Logger', function () {
   });
 
   it('should provide all of the transports for export', function () {
-    tea.should.have.property('console')
+    quantum.should.have.property('console')
       .and.be.a('function');
-    tea.should.have.property('writeFile')
+    quantum.should.have.property('writeFile')
       .and.be.a('function');
-    tea.should.have.property('broadcast')
+    quantum.should.have.property('broadcast')
       .and.be.a('function');
   });
 
@@ -85,8 +85,8 @@ describe('Logger', function () {
     }
 
     it('should automatically mount the `syslog` levels', function () {
-      var log = tea('check-syslog')
-        , levels = Object.keys(teaLevels.syslog.levels)
+      var log = quantum('check-syslog')
+        , levels = Object.keys(quantumLevels.syslog.levels)
         , spy = chai.spy();
 
       log.start();
@@ -95,8 +95,8 @@ describe('Logger', function () {
     });
 
     it('should allow for levels to be mounted', function () {
-      var log = tea('check-levels')
-        , levels = Object.keys(teaLevels.syslog.levels)
+      var log = quantum('check-levels')
+        , levels = Object.keys(quantumLevels.syslog.levels)
         , spy = chai.spy();
 
       log.levels('syslog');
@@ -106,8 +106,8 @@ describe('Logger', function () {
     });
 
     it('should work for `cli` levels', function () {
-      var log = tea('check-levels')
-        , levels = Object.keys(teaLevels.cli.levels)
+      var log = quantum('check-levels')
+        , levels = Object.keys(quantumLevels.cli.levels)
         , spy = chai.spy();
 
       log.levels('cli');
@@ -117,8 +117,8 @@ describe('Logger', function () {
     });
 
     it('should work for `http` levels', function () {
-      var log = tea('check-levels')
-        , levels = Object.keys(teaLevels.http.levels)
+      var log = quantum('check-levels')
+        , levels = Object.keys(quantumLevels.http.levels)
         , spy = chai.spy();
 
       log.levels('http');
@@ -128,7 +128,7 @@ describe('Logger', function () {
     });
 
     it('should allow for custom levels', function () {
-      var log = tea('check-levels')
+      var log = quantum('check-levels')
         , lvlSpec = { levels: { one: 1, two: 2 } }
         , levels = Object.keys(lvlSpec.levels)
         , spy = chai.spy();
