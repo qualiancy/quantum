@@ -20,13 +20,14 @@ any number of transports you wish you use. Here are a few examples.
 var quantum = require('quantum')
   , log = quantum('my-app');
 
-# Basic console logging.
+// Basic console logging.
+
 log
  .levels('syslog')
  .use(quantum.console({ theme: 'default' })
  .start();
 
-# Environment based configuration.
+// Environment based configuration.
 
 log.configure('development', function () {
   log
@@ -42,6 +43,11 @@ log.configure('production', function () {
 });
 
 log.start();
+
+// Log something!
+
+log.write('info', 'You really should know about this', { foo: 'bar' });
+log.info('You really should know about this.', { foo: 'bar' });
 ```
 
 ### CLI Utility
