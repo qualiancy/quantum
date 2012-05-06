@@ -1,12 +1,12 @@
-# Tea 
+# Quantum
 
-> Transport independant console and JSON logging.
+> quantum - n. - A discrete quantity of energy proportional in magnitude to the frequency of the radiation it represents.
 
 ## Installation
 
 Tea is available through [npm](http://npmjs.org).
 
-      npm install tea
+      npm install quantum
 
 ## Components
 
@@ -15,8 +15,10 @@ Tea is available through [npm](http://npmjs.org).
 Levels are defined by a string to numerical reference. Each level should also have a color associated
 with it for use with a reporter that supports colorful output.
 
-* Syslog
-* CLI
+- Syslog
+- CLI
+- HTTP
+- CRUD
 
 ### Transports
 
@@ -27,10 +29,11 @@ Transports are used to change where the logs are written.
 Console logging provides a number of themes to stylize the output.
 
 ```js
-var log = new tea.Logger('my-app');
+var quantum = require('quantum')
+  , log = new quantum.Logger('my-app');
 
-log.use(tea.console({ theme: 'default' });
-log.init();
+log.use(quantum.console({ theme: 'default' });
+log.start();
 
 log.info('Hello Universe');
 ```
@@ -42,10 +45,10 @@ log.info('Hello Universe');
 File logging will stream log data to file in line-delimeted JSON format. 
 
 ```js
-var log = new tea.Logger('my-app');
+var log = new quantum.Logger('my-app');
 
-log.use(tea.file(__dirname + '/logs'));
-log.init();
+log.use(quantum.writeFile(__dirname + '/logs'));
+log.start();
 
 log.info('Hello Universe');
 ```
@@ -57,10 +60,10 @@ with with a service so you can create my application that all broadcast to a
 single log collection service. More information below.
 
 ```js
-var log = new tea.Logger('my-app');
+var log = new quantum.Logger('my-app');
 
-log.use(tea.broadcast('ws://localhost:5000'));
-log.init();
+log.use(quantum.broadcast('ws://localhost:5000'));
+log.start();
 
 log.info('Hello Universe');
 ```
@@ -75,15 +78,15 @@ The following example will proxy all incoming broadcasted log events to the
 file transport. 
 
 ```js
-var log = nwe tea.Logger('tea-collector');
+var log = nwe quantum.Logger('quantum-collector');
 
-log.use(tea.file(__dirname + '/logs'));
+log.use(quantum.writeFile(__dirname + '/logs'));
 log.init();
 
-var service = tea.createService(log);
+var service = quantum.createService(log);
 service.listen(5000, function (err) {
   if (err) throw err;
-  log.info('Tea Collector started on port 5000');
+  log.info('Quantum collecting on port 5000');
 });
 ```
 
@@ -106,7 +109,7 @@ if you are interested in being regular contributor.
 
 (The MIT License)
 
-Copyright (c) 2012 Jake Luer <jake@alogicalparadox.com>
+Copyright (c) 2012 Jake Luer <jake@qualiancy.com>
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
