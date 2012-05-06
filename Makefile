@@ -8,7 +8,7 @@ test:
 		$(TESTS)
 
 test-cov: lib-cov
-	@TEA_COV=1 $(MAKE) test REPORTER=html-cov > coverage.html
+	@QUANTUM_COV=1 $(MAKE) test REPORTER=html-cov > coverage.html
 
 lib-cov:
 	@rm -rf lib-cov
