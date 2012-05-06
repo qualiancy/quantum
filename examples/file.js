@@ -1,7 +1,7 @@
-var tea = require('..')
-  , log = new tea.Logger('file-logger');
+var Quantum = require('..')
+  , log = Quantum('file-logger');
 
-log.use(tea.file(__dirname));
+log.use(Quantum.writeFile(__dirname));
 log.start();
 
 log.write('info', 'Tea please!');

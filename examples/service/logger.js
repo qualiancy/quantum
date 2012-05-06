@@ -1,7 +1,7 @@
-var tea = require('../..')
-  , log = new tea.Logger('service-logger');
+var Quantum = require('../..')
+  , log = Quantum('service-logger');
 
-log.use(tea.broadcast('ws://localhost:5000'));
+log.use(Quantum.broadcast('ws://localhost:5000'));
 log.start();
 
 log.write('info', 'Tea please!');

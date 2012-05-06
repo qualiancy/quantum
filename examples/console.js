@@ -1,4 +1,4 @@
-var tea = require('..');
+var Quantum = require('..');
 
 
 console.log('');
@@ -7,9 +7,9 @@ console.log('');
   console.log('== THEME: %s ==', theme);
   console.log('');
 
-  var log = new tea.Logger('my-app');
+  var log = Quantum('my-app');
 
-  log.use(tea.console({ theme: theme }));
+  log.use(Quantum.console({ theme: theme }));
   log.start();
 
   log.write('info', 'Tea please!');
