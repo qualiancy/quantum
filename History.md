@@ -1,4 +1,61 @@
 
+0.1.0 / 2012-05-06 
+==================
+
+  * test cov support
+  * bin refactored as quantum
+  * refactored examples with quantum
+  * writeFile/broadcast transport was not writing correctly
+  * [refactor] as quantum
+  * improved api per transport for level filtering
+  * cli watchFile // watchService
+  * tests for all provided levels and custom levels
+  * refactored logger to support chain levels api and custom level definitions
+  * emitEvent also emits to [ 'event', level ] delimited event
+  * refactored exporter to all for `tea` factory
+  * added chai spies
+  * added crud levels
+  * added http levels
+  * ocd
+  * reapply window getgid/getuid compatibility fix
+  * directory cleanup
+  * transport file => writeFile
+  * refactor transports to use new `initialize` queue style
+  * read and write queues
+  * Logger#init -> Logger#start
+  * begin work on cli
+  * util#isPathAbsolute to determine x-platform
+  * improved display of time for default theme
+  * [bug] Logger#emitEvent reference error
+  * added test coverage support
+  * improved gitignore
+  * Logger#filter support
+  * Logger#log is not Logger#write
+  * no levelInt in event, and lvl as `level`
+  * allow custom token definitions and don't include process tokens unless specified
+  * using timestamp instead of date
+  * readme update
+  * console examples in one file
+  * everything is commented
+  * refactor themes to work with event object
+  * refactor transports to work with event object
+  * refactor logger to be have chain api and simply log event object
+  * refactoring service constructor to be more node-server-like
+  * renaming service middleware to broadcast
+  * added clean theme
+  * refactor reporters as `themes`
+  * remove transports reference in Logger
+  * update all examples to use new middleware style
+  * refactor `service` transport for `use` loading
+  * refactor `file` transport for `use` loading
+  * refactor console transport for `use` loading
+  * Logger parameters changed (namespace, opts)
+  * refactoring logger for configure / use / middleware model
+  * first tests
+  * Logger#configure // Logger#use
+  * added transport loaders as exportable 'middleware'
+  * added mocha test opts
+
 0.0.13 / 2012-05-03 
 ==================
 

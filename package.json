@@ -1,9 +1,9 @@
 {
   "author": "Jake Luer <jake@qualiancy.com>",
   "name": "quantum",
-  "description": "Tiny async logging.",
+  "description": "Transport independant JSON logging for node.js.",
   "keywords": ["logger", "logging", "log"],
-  "version": "0.0.13",
+  "version": "0.1.0",
   "repository": {
     "type": "git",
     "url": "git://github.com/qualiancy/quantum.git"
