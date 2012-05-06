@@ -4,9 +4,79 @@
 
 ## Installation
 
-Tea is available through [npm](http://npmjs.org).
+Quantum is available through [npm](http://npmjs.org).
 
       npm install quantum
+
+## Getting Started
+
+### API
+
+To get started using Quantum in your application, creata a new logger and tag it with a namespace. Before
+logging anything you will need to select the log levels to be bound to your log instance, and indicate
+any number of transports you wish you use. Here are a few examples.
+
+```js
+var quantum = require('quantum')
+  , log = quantum('my-app');
+
+# Basic console logging.
+log
+ .levels('syslog')
+ .use(quantum.console({ theme: 'default' })
+ .start();
+
+# Environment based configuration.
+
+log.configure('development', function () {
+  log
+    .use(quantum.console())
+    .use(quantum.writeFile(__dirname + '/dev-logs'));
+});
+
+log.configure('production', function () {
+  var logopts = { exclude: [ 'debug' ] };
+  log
+    .use(quantum.writeFile(__dirname + '/prod-logs', logopts))
+    .use(quantum.broadcast('ws://logger.my-app.com', logopts));
+});
+
+log.start();
+```
+
+### CLI Utility
+
+The `quantum` command (when installed globally) allows for observation of ongoing logging activites. 
+Use it to monitor currenting currning services or `tail` like behavior for JSON formatted log files.
+
+    Quantum
+    https://github.com/qualiancy/quantum
+
+    quantum --help
+       Show CLI help contents
+
+    quantum --version
+       Show the current version
+
+    quantum watch service <options>
+       Observe all log events on a quantum collection service
+         -p, --port [8080] The port the collector is running on.
+         -h, --host [localhost] The host the service is running on.
+         -t, --theme [default] Console theme to display log events on. Use `none` to disable.
+         -f, --file Save incoming log events to this file in JSON format.
+
+    quantum watch file <options>
+       Observe all log events on a quantum based json log file.
+         -l, --levels [syslog] Levels used in the file. Ignored if theme is `json`
+         -t, --theme [default] Console theme to display log events on.
+         -f, --file Listen for log events on this file. Expected JSON format.
+
+    quantum collect <options>
+       Starts a Quantum collection service.
+         -l, --levels [syslog] Levels to use. Recommended log nodes use the same.
+         -p, --port [8080] The port the collector will listen on.
+         -t, --theme [default] Console theme to display log events on. Use `none` to disable.
+         -f, --file Save incoming log events to this file in JSON format.
 
 ## Components
 
@@ -15,16 +85,18 @@ Tea is available through [npm](http://npmjs.org).
 Levels are defined by a string to numerical reference. Each level should also have a color associated
 with it for use with a reporter that supports colorful output.
 
-- Syslog
+- Syslog (default)
 - CLI
 - HTTP
 - CRUD
+
+By using levels, a number of helper methods are mounted ont
 
 ### Transports
 
 Transports are used to change where the logs are written.
 
-#### Console
+##### Console
 
 Console logging provides a number of themes to stylize the output.
 
@@ -38,9 +110,9 @@ log.start();
 log.info('Hello Universe');
 ```
 
-![Tea Console Themes](http://f.cl.ly/items/22230e0G0p0p1C0X4631/tea_themes.png)
+![Quantum Console Themes](http://f.cl.ly/items/22230e0G0p0p1C0X4631/tea_themes.png)
 
-#### File
+##### File
 
 File logging will stream log data to file in line-delimeted JSON format. 
 
@@ -53,9 +125,9 @@ log.start();
 log.info('Hello Universe');
 ```
 
-#### Broadcast
+##### Broadcast
 
-Broadcast logging will broadcast events through websockets. Tea also comes
+Broadcast logging will broadcast events through websockets. Quantum also comes
 with with a service so you can create my application that all broadcast to a 
 single log collection service. More information below.
 
@@ -68,10 +140,12 @@ log.start();
 log.info('Hello Universe');
 ```
 
+##### Multiple transports
+
 ### Service
 
-The Tea collection service is for use with the broadcast transport. The service
-will proxy incoming log events to a new Tea logger. This will allow for multiple
+The Quantum collection service is for use with the broadcast transport. The service
+will proxy incoming log events to a new Quantum logger. This will allow for multiple
 logger collection by a single service.
 
 The following example will proxy all incoming broadcasted log events to the 
