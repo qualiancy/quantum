@@ -3,7 +3,7 @@ var Quantum = require('..');
 
 console.log('');
 
-[ 'clean', 'default', 'npm' ].forEach(function (theme) {
+[ 'clean', 'default', 'simple', 'npm', 'debug' ].forEach(function (theme) {
   console.log('== THEME: %s ==', theme);
   console.log('');
 
@@ -14,7 +14,19 @@ console.log('');
 
   log.write('info', 'Tea please!');
   log.info('This is info.');
-  log.debug('This is debug.');
+  log.debug('This is debug.', {
+      hello: 'universe'
+    , withArray: [
+        'hello'
+        , 'universe'
+        , { quantum: true
+          , fast: 4 }
+      ]
+    , withObj: {
+        hello: 'univese'
+      }
+  });
+
   log.notice('This is a notice.');
   log.warn('This is a warning.');
   log.error('This is an error.');
