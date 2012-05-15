@@ -1,4 +1,11 @@
 
+0.1.4 / 2012-05-15 
+==================
+
+  * simple theme (default w/o time and ns)
+  * debug theme to display inspected json
+  * adding json inspection (primative)
+
 0.1.3 / 2012-05-07 
 ==================
 
