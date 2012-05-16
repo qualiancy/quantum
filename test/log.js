@@ -139,4 +139,20 @@ describe('Logger', function () {
       spy.should.have.been.called.exactly(levels.length);
     });
   });
+
+  describe('tokens', function () {
+    it('should allow for custom tokens', function (done) {
+      var log = quantum('check-tokens');
+
+      log.start();
+      log.token('env', 'testing');
+
+      log.on('event', function(ev) {
+        ev.tokens.should.have.property('env', 'testing');
+        done();
+      });
+
+      log.write('info', 'testing token');
+    });
+  });
 });
