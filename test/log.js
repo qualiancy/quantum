@@ -155,4 +155,23 @@ describe('Logger', function () {
       log.write('info', 'testing token');
     });
   });
+
+  describe('cloning', function () {
+    it('should allow for a log to be cloned', function () {
+      var log1 = quantum('log-1')
+        , spy1 = chai.spy();
+      log1.start();
+      log1.on('event', spy1);
+
+      var log2 = log1.clone('log-2')
+        , spy2 = chai.spy();
+      log2.namespace.should.equal('log-2');
+      log2.start();
+
+      log2.on('event', spy2);
+      log2.write('info', { testing: true });
+      spy1.should.have.not.been.called();
+      spy2.should.have.been.called.once;
+    });
+  });
 });
