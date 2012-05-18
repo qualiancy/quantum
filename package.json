@@ -23,7 +23,7 @@
     "oath": "0.2.x",
     "orchid": "0.0.x",
     "filtr": "0.2.x",
-    "optimist": "0.3.x"
+    "electron": "0.1.x"
   },
   "devDependencies": {
     "mocha": "*",
