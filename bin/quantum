@@ -1,9 +1,7 @@
 #! /usr/bin/env node
+// -*- mode: javascript -*-
+// vi: set ft=javascript :
 
-var args = require('optimist').argv
-  , command = args._.slice(0)
-  , cli = require('../lib/quantum/cli');
-
-args.cwd = process.cwd();
-
-cli(command, args);
+var program = require('../lib/quantum/cli')
+  .cwd(process.cwd())
+  .parse(process.argv);
