@@ -1,4 +1,16 @@
 
+0.2.0 / 2012-05-23 
+==================
+
+  * Merge branch 'refactor/cli'
+  * refactor all cli options to use electron
+  * start returns this
+  * collect command using electron
+  * begin rewrite with electron
+  * reverting simple theme
+  * start returns constructed instance
+  * drop optimist
+
 0.1.7 / 2012-05-18 
 ==================
 

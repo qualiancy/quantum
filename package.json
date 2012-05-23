@@ -3,7 +3,7 @@
   "name": "quantum",
   "description": "Transport independant JSON logging for node.js.",
   "keywords": ["logger", "logging", "log"],
-  "version": "0.1.7",
+  "version": "0.2.0",
   "repository": {
     "type": "git",
     "url": "git://github.com/qualiancy/quantum.git"
