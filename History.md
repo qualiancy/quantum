@@ -1,4 +1,10 @@
 
+0.2.2 / 2012-06-06 
+==================
+
+  * cloning example
+  * broadcast mounts synchronously
+
 0.2.1 / 2012-05-24 
 ==================
 
