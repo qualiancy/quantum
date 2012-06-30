@@ -161,7 +161,7 @@ describe('Logger', function () {
 
       var log2 = log1.clone('log-2')
         , spy2 = chai.spy();
-      log2.namespace.should.equal('log-2');
+      log2._opts.namespace.should.equal('log-2');
       log2.start();
 
       log2.on('event', spy2);
