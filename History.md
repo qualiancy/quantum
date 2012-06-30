@@ -1,4 +1,18 @@
 
+0.3.0 / 2012-06-30 
+==================
+
+  * Merge branch 'refactor/modulize'
+  * file transport using fsagent for directory making
+  * support template tags in messages
+  * clones now use event proxy instead of copying over transports
+  * add event emitter log transport
+  * use supports object with handle function
+  * cli colors only used when output is tty
+  * clean up internals
+  * remove all unnecissary transports/features
+  * add sherlock dep
+
 0.2.2 / 2012-06-06 
 ==================
 
