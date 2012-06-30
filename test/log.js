@@ -152,7 +152,32 @@ describe('Logger', function () {
     });
   });
 
+  describe('emitter transport', function () {
+
+    it('can accept emitted events', function () {
+      var log = quantum('log')
+        , emitter = quantum.emitter()
+        , spy = chai.spy(function (event) {
+            event.should.have.property('level', 'info');
+            event.should.have.property('msg', 'testing')
+            event.should.have.property('_')
+              .deep.equal({ testing: true });
+            event.should.have.property('tokens')
+              .with.keys('namespace', 'timestamp');
+          });
+
+      emitter.on('event', spy);
+
+      log.use(emitter);
+      log.start();
+      log.write('info', 'testing', { testing: true });
+      spy.should.have.been.called.once;
+    });
+
+  });
+
   describe('cloning', function () {
+
     it('should allow for a log to be cloned', function () {
       var log1 = quantum('log-1')
         , spy1 = chai.spy();
@@ -169,5 +194,6 @@ describe('Logger', function () {
       spy1.should.have.not.been.called();
       spy2.should.have.been.called.once;
     });
+
   });
 });
