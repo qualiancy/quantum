@@ -15,8 +15,6 @@ describe('Logger', function () {
   it('should export correctly', function () {
     quantum.should.be.a('function');
     quantum.Logger.should.be.a('function');
-    quantum.Service.should.be.a('function');
-    quantum.createService.should.be.a('function');
   });
 
   it('should allow for environment configuration', function () {
@@ -57,8 +55,6 @@ describe('Logger', function () {
     quantum.should.have.property('console')
       .and.be.a('function');
     quantum.should.have.property('writeFile')
-      .and.be.a('function');
-    quantum.should.have.property('broadcast')
       .and.be.a('function');
   });
 

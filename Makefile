@@ -10,8 +10,11 @@ test:
 test-cov: lib-cov
 	@QUANTUM_COV=1 $(MAKE) test REPORTER=html-cov > coverage.html
 
-lib-cov:
-	@rm -rf lib-cov
+lib-cov: clean
 	@jscoverage lib lib-cov
 
-.PHONY: test test-cov lib-cov
+clean:
+	@rm -fr lib-cov
+	@rm -f coverage.html
+
+.PHONY: test test-cov lib-cov clean
