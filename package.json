@@ -20,7 +20,7 @@
     , "filtr": "0.3.x"
     , "fsagent": "0.2.x"
     , "oath": "0.2.x"
-    , "sherlock": "0.1.0"
+    , "sherlock": "0.1.x"
   },
   "devDependencies": {
     "mocha": "*",
