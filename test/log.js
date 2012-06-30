@@ -152,6 +152,54 @@ describe('Logger', function () {
     });
   });
 
+  describe('message parsing', function () {
+
+    it('can parse tokens', function () {
+      var log = quantum('parsing').start()
+        , spy = chai.spy(function (event) {
+            event.msg.should.equal('hello parsing universe');
+          });
+
+      log.on('event', spy);
+      log.info('hello ::namespace universe');
+      spy.should.have.been.called.once;
+    });
+
+    it('can parse tokens', function () {
+      var log = quantum('parsing').start()
+        , spy = chai.spy(function (event) {
+            event.msg.should.equal('hello universe');
+          });
+
+      log.on('event', spy);
+      log.info('hello #{where}', { where: 'universe' });
+      spy.should.have.been.called.once;
+    });
+
+    it('can parse colorize', function () {
+      var log = quantum('parsing').start()
+        , spy = chai.spy(function (event) {
+            event.msg.should.equal('hello \u001b[31muniverse\u001b[0m');
+          });
+
+      log.on('event', spy);
+      log.info('hello [universe](red)', { where: 'universe' });
+      spy.should.have.been.called.once;
+    });
+
+    it('can parse complex messages', function () {
+      var log = quantum('parsing').start()
+        , spy = chai.spy(function (event) {
+            event.msg.should.equal('hello \u001b[31muniverse\u001b[0m from \u001b[34mparsing\u001b[0m');
+          });
+
+      log.on('event', spy);
+      log.info('hello [#{where}](red) from [::namespace](blue)', { where: 'universe' });
+      spy.should.have.been.called.once;
+    });
+
+  });
+
   describe('emitter transport', function () {
 
     it('can accept emitted events', function () {
