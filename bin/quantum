@@ -1,7 +1,0 @@
-#! /usr/bin/env node
-// -*- mode: javascript -*-
-// vi: set ft=javascript :
-
-var program = require('../lib/quantum/cli')
-  .cwd(process.cwd())
-  .parse(process.argv);

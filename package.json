@@ -9,9 +9,6 @@
     "url": "git://github.com/qualiancy/quantum.git"
   },
   "main": "./index",
-  "bin": {
-    "quantum": "./bin/quantum"
-  },
   "scripts": {
     "test": "make test"
   },
@@ -19,11 +16,11 @@
     "node": ">= 0.4.0"
   },
   "dependencies": {
-    "drip": "0.2.x",
-    "oath": "0.2.x",
-    "orchid": "0.0.x",
-    "filtr": "0.2.x",
-    "electron": "0.1.x"
+      "drip": "0.3.x"
+    , "filtr": "0.3.x"
+    , "fsagent": "0.2.x"
+    , "oath": "0.2.x"
+    , "sherlock": "0.1.x"
   },
   "devDependencies": {
     "mocha": "*",
