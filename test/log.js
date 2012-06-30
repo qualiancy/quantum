@@ -180,7 +180,16 @@ describe('Logger', function () {
 
     it('should allow for a log to be cloned', function () {
       var log1 = quantum('log-1')
-        , spy1 = chai.spy();
+        , spy1 = chai.spy(function (event) {
+            event.should.have.property('level', 'info');
+            event.should.have.property('msg', 'testing')
+            event.should.have.property('_')
+              .deep.equal({ testing: true });
+            event.should.have.property('tokens')
+              .with.keys('namespace', 'timestamp');
+            event.tokens.namespace.should.equal('log-2');
+          });
+
       log1.start();
       log1.on('event', spy1);
 
@@ -190,8 +199,9 @@ describe('Logger', function () {
       log2.start();
 
       log2.on('event', spy2);
-      log2.write('info', { testing: true });
-      spy1.should.have.not.been.called();
+      log2.write('info', 'testing', { testing: true });
+
+      spy1.should.have.been.called.once;
       spy2.should.have.been.called.once;
     });
 
