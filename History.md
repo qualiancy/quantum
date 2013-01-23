@@ -1,4 +1,10 @@
 
+0.4.0 / 2013-01-23 
+==================
+
+  * lib: refactor all necissary elements with new deps
+  * deps: update all deps and swap depreciated out for new replacements
+
 0.3.1 / 2012-06-30 
 ==================
 
