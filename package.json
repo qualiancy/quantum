@@ -16,11 +16,13 @@
     "node": ">= 0.4.0"
   },
   "dependencies": {
-      "drip": "0.3.x"
-    , "filtr": "0.3.x"
-    , "fsagent": "0.2.x"
+      "drip": "1.1.x"
+    , "fsagent": "0.3.x"
+    , "gaia-filter": "0.1.x"
     , "oath": "0.2.x"
-    , "sherlock": "0.1.x"
+    , "tea-inherits": "0.1.x"
+    , "tea-objdisplay": "0.1.x"
+    , "tea-properties": "0.1.x"
   },
   "devDependencies": {
     "mocha": "*",
