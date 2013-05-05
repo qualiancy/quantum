@@ -1,16 +1,4 @@
-if (!process.env.NODE_ENV) process.env.NODE_ENV = 'test';
-
-var chai = require('chai')
-  , spies = require('chai-spies')
-  , should = chai.should();
-
-chai.use(spies);
-
-var quantum = require('..')
-  , quantumLevels = require('../lib/quantum/levels')
-  , Promise = require('oath');
-
-describe('Logger', function () {
+describe.skip('Logger', function () {
 
   it('should export correctly', function () {
     quantum.should.be.a('function');
