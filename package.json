@@ -13,13 +13,14 @@
     "test": "make test"
   },
   "engines": {
-    "node": ">= 0.4.0"
+    "node": ">= 0.8.0"
   },
   "dependencies": {
       "drip": "1.1.x"
+    , "facet": "0.4.x"
     , "fsagent": "0.3.x"
-    , "gaia-filter": "0.1.x"
     , "oath": "0.2.x"
+    , "readable-stream": "1.0.x"
     , "tea-inherits": "0.1.x"
     , "tea-objdisplay": "0.1.x"
     , "tea-properties": "0.1.x"
