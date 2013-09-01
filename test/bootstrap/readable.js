@@ -1,6 +1,6 @@
 var inherits = require('tea-inherits')
   , Readable = require('stream').Readable;
-  
+
 if (!Readable) {
   Readable = require('readable-stream');
 }
@@ -23,5 +23,5 @@ ReadStream.prototype._read = function () {
     this.once('_ready', function() {
       self.push(self._queue.shift());
     });
-  } 
+  }
 };

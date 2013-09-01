@@ -1,19 +1,19 @@
-var inherits = require('tea-inherits')
-  , Writable = require('stream').Writable;
-  
+var inherits = require('util').inherits;
+var Writable = require('stream').Writable;
+
 if (!Writable) {
   Writable = require('readable-stream').Writable;
 }
 
 module.exports = WriteStream;
 
-function WriteStream () {
+function WriteStream() {
   Writable.call(this, { objectMode: true, highWaterMark: 1 });
 }
 
 inherits(WriteStream, Writable);
 
-WriteStream.prototype._write = function (logEvent, enc, next) {
-  this.emit('_write', logEvent);
+WriteStream.prototype._write = function(ev, enc, next) {
+  this.emit('_write', ev);
   next();
 };
