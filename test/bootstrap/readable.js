@@ -1,5 +1,5 @@
-var inherits = require('tea-inherits')
-  , Readable = require('stream').Readable;
+var inherits = require('util').inherits;
+var Readable = require('stream').Readable;
 
 if (!Readable) {
   Readable = require('readable-stream');
