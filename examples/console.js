@@ -1,19 +1,39 @@
-var Quantum = require('..');
+var quantum = require('..');
+var async = require('breeze-async');
 
+var THEMES = [
+    'default'
+  , 'simple'
+  , 'clean'
+  , 'npm'
+  , 'json'
+];
 
 console.log('');
 
-[ 'clean', 'default', 'simple', 'npm', 'debug' ].forEach(function (theme) {
-  console.log('== THEME: %s ==', theme);
+async.forEachSeries(THEMES, function(name, next) {
+  console.log('== THEME: %s ==', name);
   console.log('');
 
-  var log = Quantum('my-app');
+  var log = quantum('my-app');
+  var theme = new quantum.streams.ThemeStream(name);
+  log.pipe(theme).pipe(process.stdout);
 
-  log.use(Quantum.console({ theme: theme }));
-  log.start();
+  log.on('end', function() {
+    console.log('');
+    console.log('');
+    next();
+  });
 
-  log.write('info', 'Tea please!');
   log.info('This is info.');
+
+  log.notice('This is a notice.');
+  log.warn('This is a warning.');
+  log.error('This is an error.');
+  log.crit('This is critical!!');
+  log.alert('This is an alert.');
+  log.emerg('This is an emergency.');
+
   log.debug('This is debug.', {
       hello: 'universe'
     , withArray: [
@@ -27,13 +47,5 @@ console.log('');
       }
   });
 
-  log.notice('This is a notice.');
-  log.warn('This is a warning.');
-  log.error('This is an error.');
-  log.crit('This is critical!!');
-  log.alert('This is an alert.');
-  log.emerg('This is an emergency.');
-
-  console.log('');
-  console.log('');
+  log.end();
 });

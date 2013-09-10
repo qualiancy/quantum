@@ -22,8 +22,9 @@
     , "tea-properties": "0.1.x"
   },
   "devDependencies": {
-    "mocha": "*",
-    "chai": "*",
-    "chai-spies": "*"
+      "breeze-async": "*"
+    , "mocha": "*"
+    , "chai": "*"
+    , "chai-spies": "*"
   }
 }
