@@ -110,8 +110,65 @@ describe.only('Logger', function() {
         stream.emit('_ready');
       });
 
-      it('keeps original namespace');
       it('filters malformed leg events');
+    });
+  });
+
+  describe('when cloned', function() {
+    it('sets correct namespace', function() {
+      var logger = build('parent');
+      var clone = logger.clone('clone');
+      clone.get('namespace').should.equal('clone');
+    });
+
+    it('pipes events to parent', function(done) {
+      var logger = build('parent');
+      var clone = logger.clone('clone');
+
+      logger.on('readable', function() {
+        var ev = this.read();
+        ev.should.have.deep.property('tokens.namespace', 'clone');
+        done();
+      });
+
+      clone.log('info', 'Test Message');
+    });
+
+    it('supports multiple clones', function(done) {
+      var logger = build('parent');
+      var clone1 = logger.clone('clone1');
+      var clone2 = logger.clone('clone2');
+      var c = 2;
+
+      var readable = chai.spy('readable', function() {
+        var ev = this.read();
+        [ 'clone1', 'clone2' ].should.contain.members([ ev.tokens.namespace ]);
+        --c || logger.end();
+      });
+
+      logger.on('readable', readable);
+      logger.on('end', done);
+
+      clone1.log('info', 'Test');
+      clone2.log('info', 'Test');
+      clone1.end();
+      clone2.end();
+    });
+
+    it('unpipes when clone ends', function(done) {
+      var logger = build('parent');
+      var clone = logger.clone('clone');
+
+      var parentEnd = chai.spy('parent end');
+      logger.on('end', parentEnd);
+
+      logger.on('unpipe', function(src) {
+        src.should.deep.equal(clone);
+        parentEnd.should.have.not.been.called();
+        done();
+      });
+
+      clone.end();
     });
   });
 });
