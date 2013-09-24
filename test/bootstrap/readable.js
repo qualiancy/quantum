@@ -1,10 +1,6 @@
 var inherits = require('util').inherits;
 var Readable = require('stream').Readable;
 
-if (!Readable) {
-  Readable = require('readable-stream');
-}
-
 module.exports = ReadStream;
 
 function ReadStream () {

@@ -1,10 +1,6 @@
 var inherits = require('util').inherits;
 var Writable = require('stream').Writable;
 
-if (!Writable) {
-  Writable = require('readable-stream').Writable;
-}
-
 module.exports = WriteStream;
 
 function WriteStream() {

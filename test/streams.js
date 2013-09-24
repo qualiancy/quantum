@@ -1,9 +1,9 @@
 describe.only('Logger', function() {
   var Logger = quantum.Logger;
 
-  function build(ns, opts) {
-    ns = ns || 'test-namespace';
-    return new Logger(ns, opts);
+  function build(name, opts) {
+    name = name || 'test-log';
+    return new Logger(name, opts);
   }
 
   describe('when constructed', function() {
@@ -109,16 +109,14 @@ describe.only('Logger', function() {
         stream._queue.push(testEvent);
         stream.emit('_ready');
       });
-
-      it('filters malformed leg events');
     });
   });
 
   describe('when cloned', function() {
-    it('sets correct namespace', function() {
+    it('sets correct name', function() {
       var logger = build('parent');
       var clone = logger.clone('clone');
-      clone.get('namespace').should.equal('clone');
+      clone.get('name').should.equal('clone');
     });
 
     it('pipes events to parent', function(done) {
@@ -127,7 +125,7 @@ describe.only('Logger', function() {
 
       logger.on('readable', function() {
         var ev = this.read();
-        ev.should.have.deep.property('tokens.namespace', 'clone');
+        ev.should.have.property('name', 'clone');
         done();
       });
 
@@ -142,7 +140,7 @@ describe.only('Logger', function() {
 
       var readable = chai.spy('readable', function() {
         var ev = this.read();
-        [ 'clone1', 'clone2' ].should.contain.members([ ev.tokens.namespace ]);
+        [ 'clone1', 'clone2' ].should.contain.members([ ev.name ]);
         --c || logger.end();
       });
 
@@ -153,22 +151,6 @@ describe.only('Logger', function() {
       clone2.log('info', 'Test');
       clone1.end();
       clone2.end();
-    });
-
-    it('unpipes when clone ends', function(done) {
-      var logger = build('parent');
-      var clone = logger.clone('clone');
-
-      var parentEnd = chai.spy('parent end');
-      logger.on('end', parentEnd);
-
-      logger.on('unpipe', function(src) {
-        src.should.deep.equal(clone);
-        parentEnd.should.have.not.been.called();
-        done();
-      });
-
-      clone.end();
     });
   });
 });
