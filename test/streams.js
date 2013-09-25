@@ -140,6 +140,7 @@ describe.only('Logger', function() {
 
       var readable = chai.spy('readable', function() {
         var ev = this.read();
+        if (!ev) return;
         [ 'clone1', 'clone2' ].should.contain.members([ ev.name ]);
         --c || logger.end();
       });
