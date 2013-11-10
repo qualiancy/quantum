@@ -1,9 +1,8 @@
 describe('Logger', function() {
-  var Logger = quantum.Logger;
 
   function build(name, opts) {
     name = name || 'test-log';
-    return new Logger(name, opts);
+    return quantum(name, opts);
   }
 
   describe('when constructed', function() {
@@ -32,8 +31,8 @@ describe('Logger', function() {
       it('responds to all levels', function() {
         var logger = build();
 
-        Object.keys(Logger.levels).forEach(function(lvl) {
-          var level = Logger.levels[lvl];
+        Object.keys(quantum.levels).forEach(function(lvl) {
+          var level = quantum.levels[lvl];
           logger.should.itself.respondTo(level[0]);
         });
       });
