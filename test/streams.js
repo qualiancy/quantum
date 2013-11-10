@@ -1,4 +1,4 @@
-describe.only('Logger', function() {
+describe('Logger', function() {
   var Logger = quantum.Logger;
 
   function build(name, opts) {
@@ -7,52 +7,7 @@ describe.only('Logger', function() {
   }
 
   describe('when constructed', function() {
-    it('sets env setting', function() {
-      var logger = build();
-      var ENV = process.env.NODE_ENV || 'development';
-      logger.get('env').should.equal(ENV);
-    });
 
-    it('sets default tokens', function() {
-      var logger = build();
-      var def = [ 'process', 'memory' ];
-      logger.get('tokens').should.deep.equal(def);
-    });
-
-    it('mounts syslog levels');
-  });
-
-  describe('when configured', function() {
-    it('invokes non-env function', function() {
-      var logger = build();
-      var spy = chai.spy('non-env');
-      logger.configure(spy);
-      spy.should.have.been.called(1);
-    });
-
-    it('invokes current env function', function() {
-      var logger = build();
-      var spy = chai.spy('env');
-      var env = logger.get('env');
-      logger.configure(env, spy);
-      spy.should.have.been.called(1);
-    });
-
-    it('ignores non-current env function', function() {
-      var logger = build();
-      var spy = chai.spy('non-current');
-      var env = logger.get('env') + '-not';
-      logger.configure(env, spy);
-      spy.should.have.not.been.called();
-    });
-
-    it('invokes when more than one env used', function() {
-      var logger = build();
-      var spy = chai.spy('more-than-one');
-      var env = logger.get('env');
-      logger.configure(env + '-not', env, spy);
-      spy.should.have.been.called(1);
-    });
   });
 
   describe('when written to', function() {
@@ -60,7 +15,7 @@ describe.only('Logger', function() {
       it('pipes to writable streams', function(done) {
         var logger = build();
         var stream = new MockWritable();
-        var testEvent = { type: 'debug', msg: 'Test message' };
+        var testEvent = logger.frame('info', 'Test Message');
 
         logger.pipe(stream);
 
@@ -74,6 +29,15 @@ describe.only('Logger', function() {
     });
 
     describe('with mounted level', function() {
+      it('responds to all levels', function() {
+        var logger = build();
+
+        Object.keys(Logger.levels).forEach(function(lvl) {
+          var level = Logger.levels[lvl];
+          logger.should.itself.respondTo(level[0]);
+        });
+      });
+
       it('pipes to writable streams', function(done) {
         var logger = build();
         var stream = new MockWritable();
@@ -81,12 +45,12 @@ describe.only('Logger', function() {
         logger.pipe(stream);
 
         stream.on('_write', function(ev) {
-          ev.should.have.property('type', 'info');
-          ev.should.have.property('msg', 'Test message');
+          ev.should.have.deep.property('settings.level', logger.level('info'));
+          ev.should.have.deep.property('settings.message', 'Test message');
           done();
         });
 
-        logger.log('info', 'Test message');
+        logger.info('Test message');
       });
     });
   });
@@ -96,7 +60,7 @@ describe.only('Logger', function() {
       it('emits readable event', function(done) {
         var logger = build();
         var stream = new MockReadable();
-        var testEvent = { type: 'info', msg: 'Test message' };
+        var testEvent = logger.frame('info', 'Test Message');
 
         stream.pipe(logger);
 
@@ -112,46 +76,46 @@ describe.only('Logger', function() {
     });
   });
 
-  describe('when cloned', function() {
+  describe('when child created', function() {
     it('sets correct name', function() {
       var logger = build('parent');
-      var clone = logger.clone('clone');
-      clone.get('name').should.equal('clone');
+      var child = logger.child('child');
+      child.get('name').should.equal('child');
     });
 
     it('pipes events to parent', function(done) {
       var logger = build('parent');
-      var clone = logger.clone('clone');
+      var child = logger.child('child');
 
       logger.on('readable', function() {
         var ev = this.read();
-        ev.should.have.property('name', 'clone');
+        ev.should.have.deep.property('settings.name', 'child');
         done();
       });
 
-      clone.log('info', 'Test Message');
+      child.log('info', 'Test Message');
     });
 
-    it('supports multiple clones', function(done) {
+    it('supports multiple childs', function(done) {
       var logger = build('parent');
-      var clone1 = logger.clone('clone1');
-      var clone2 = logger.clone('clone2');
+      var child1 = logger.child('child1');
+      var child2 = logger.child('child2');
       var c = 2;
 
       var readable = chai.spy('readable', function() {
         var ev = this.read();
         if (!ev) return;
-        [ 'clone1', 'clone2' ].should.contain.members([ ev.name ]);
+        [ 'child1', 'child2' ].should.contain.members([ ev.settings.name ]);
         --c || logger.end();
       });
 
       logger.on('readable', readable);
       logger.on('end', done);
 
-      clone1.log('info', 'Test');
-      clone2.log('info', 'Test');
-      clone1.end();
-      clone2.end();
+      child1.log('info', 'Test');
+      child2.log('info', 'Test');
+      child1.end();
+      child2.end();
     });
   });
 });

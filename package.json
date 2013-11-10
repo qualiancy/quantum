@@ -17,8 +17,10 @@
   },
   "dependencies": {
       "facet": "0.4.x"
+    , "refractory": "0.0.x"
     , "roundabout": "0.1.x"
     , "transmute": "0.1.x"
+    , "tea-extend": "*"
     , "tea-objdisplay": "0.1.x"
     , "tea-properties": "0.1.x"
   },
